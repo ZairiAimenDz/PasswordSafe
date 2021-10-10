@@ -1,5 +1,6 @@
 ﻿using PasswordSafe.Models;
 using PasswordSafe.Services;
+using PasswordSafe.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +35,10 @@ namespace PasswordSafe
             SelectedGroupIcon.ItemsSource = DatabaseService.GetIcons();
             GetData();
             DataContext = this;
+            if (!App.isOnline)
+            {
+                MessageBox.Show("We Couldn't Find The Database, You Will Be Using A BackUp Database, You Can Also Try And Setup The Database in The Settings Again","Error Database Not Found",MessageBoxButton.OK);
+            }
         }
         public void GetData()
         {
@@ -54,14 +59,15 @@ namespace PasswordSafe
             var grp = new SubGroup();
             Database.FirstOrDefault().ChildNodes.Add(grp);
             SelectedGroup = grp;
-            (SelectedGroupName.Text, SelectedGroupIcon.Text) = (SelectedGroup.Name, SelectedGroup.Icon);
+            SelectedGroupName.Text = SelectedGroup.Name;
             DatabaseService.AddGroup(grp);
             GroupDetails.IsExpanded = true;
         }
 
         private void Users_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            var sen = (ListView)sender;
+            SelectedAccount = sen.SelectedItem as Account;
         }
 
         private void GroupsTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -105,7 +111,9 @@ namespace PasswordSafe
 
         private void SettingsClicked(object sender, RoutedEventArgs e)
         {
-
+            var set = new Settings();
+            set.ShowDialog();
+            GetData();
         }
 
         private void ExitClicked(object sender, RoutedEventArgs e)
@@ -172,6 +180,7 @@ namespace PasswordSafe
                 {
                     SelectedGroup.Accounts.Remove(SelectedAccount);
                     DatabaseService.UpdateGroup(SelectedGroup);
+                    Users.ItemsSource = SelectedGroup.Accounts;
                 }
                 else
                     MessageBox.Show("Select The Element You Want To Delete");

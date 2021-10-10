@@ -19,17 +19,17 @@
                 </MenuItem.Icon>
                 <MenuItem Header="Reload" Click="ReloadClicked">
                     <MenuItem.Icon>
-                        <Label FontFamily="Segoe MDL2 Assets" Content="&#xE895;" Padding="0"/>
+                        <Label  VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE895;" Padding="0"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Settings" Click="SettingsClicked">
                     <MenuItem.Icon>
-                        <Label FontFamily="Segoe MDL2 Assets" Content="&#xE713;" Padding="0"/>
+                        <Label VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" Content="&#xE713;" Padding="0"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Exit" Click="ExitClicked">
                     <MenuItem.Icon>
-                        <Label FontFamily="Segoe MDL2 Assets" Content="&#xEF2C;" Padding="0"/>
+                        <Label  VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" Content="&#xEF2C;" Padding="0"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -39,14 +39,14 @@
                 </MenuItem.Icon>
                 <MenuItem Header="New Group" Click="NewGroupClicked">
                     <MenuItem.Icon>
-                        <Label FontFamily="Segoe MDL2 Assets" Content="&#xE902;" Padding="0"/>
+                        <Label VerticalAlignment="Center"  FontFamily="Segoe MDL2 Assets" Content="&#xE902;" Padding="0"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Help" Click="HelpClicked">
                 <MenuItem.Icon>
-                    <Label FontFamily="Segoe MDL2 Assets" Content="&#xE946;" Padding="0"/>
+                    <Label VerticalAlignment="Top"  FontFamily="Segoe MDL2 Assets" Content="&#xE946;" Padding="0"/>
                 </MenuItem.Icon>
             </MenuItem>
         </Menu>
