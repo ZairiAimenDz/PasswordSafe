@@ -28,7 +28,7 @@ namespace PasswordSafe.Windows
         public Settings()
         {
             InitializeComponent();
-            SelectedDb.Text = AppSettings.Default["DBLink"].ToString();
+            //SelectedDb.Text = AppSettings.Default["DBLink"].ToString();
         }
 
         private void FileSelectionClicked(object sender, RoutedEventArgs e)
@@ -39,42 +39,44 @@ namespace PasswordSafe.Windows
             if (openFileDialog.ShowDialog() == true)
             {
                 if (File.Exists(openFileDialog.FileName))
-                    SelectedDb.Text = openFileDialog.FileName;
+                {
+                    //SelectedDb.Text = openFileDialog.FileName;
+                }
             }
         }
 
         private void SaveButtonClicked(object sender, RoutedEventArgs e)
         {
-            AppSettings.Default["DBLink"] = SelectedDb.Text.Replace("\\", "/");
+            //AppSettings.Default["DBLink"] = SelectedDb.Text.Replace("\\", "/");
             AppSettings.Default["DbUsername"] = Username.Text;
             AppSettings.Default["DbPassword"] = AccessPassword.Text;
             AppSettings.Default.Save();
             Close();
         }
 
-        private void TestConnectivity(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (new ConnectToSharedFolder(SelectedDb.Text, new NetworkCredential(Username.Text, AccessPassword.Text)))
+        /*        private void TestConnectivity(object sender, RoutedEventArgs e)
                 {
-                    File.Copy(SelectedDb.Text, "C:/ProgramData/TempPassDb.db");
-                    using (var db = new LiteDatabase(@"Filename=C:/ProgramData/TempPassDb.db;Connection=Shared;"))
+                    try
                     {
-                        var col = db.GetCollection<SubGroup>();
-                        var count = col.Count();
-                        var testvalue = new SubGroup() {Id=Guid.NewGuid()};
-                        col.Insert(testvalue);
-                        col.Delete(testvalue.Id);
+                        using (new ConnectToSharedFolder(SelectedDb.Text, new NetworkCredential(Username.Text, AccessPassword.Text)))
+                        {
+                            File.Copy(SelectedDb.Text, "C:/ProgramData/TempPassDb.db");
+                            using (var db = new LiteDatabase(@"Filename=C:/ProgramData/TempPassDb.db;Connection=Shared;"))
+                            {
+                                var col = db.GetCollection<SubGroup>();
+                                var count = col.Count();
+                                var testvalue = new SubGroup() {Id=Guid.NewGuid()};
+                                col.Insert(testvalue);
+                                col.Delete(testvalue.Id);
+                            }
+                            File.Delete("C:/ProgramData/TempPassDb.db");
+                        }
+                        AccessAvail.Content = "Access Available";
                     }
-                    File.Delete("C:/ProgramData/TempPassDb.db");
-                }
-                AccessAvail.Content = "Access Available";
-            }
-            catch
-            {
-                AccessAvail.Content = "Access Unavailable";
-            }
-        }
+                    catch
+                    {
+                        AccessAvail.Content = "Access Unavailable";
+                    }
+                }*/
     }
 }

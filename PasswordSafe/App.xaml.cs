@@ -23,7 +23,7 @@ namespace PasswordSafe
         {
             get
             {
-                var filePath = @"Filename=C:/ProgramData/BackUpPassDb.db;Connection=Shared;";
+                var filePath = @"Filename=PassDb.db;Connection=Shared;Password=Admin123";
                 return new LiteDatabase(filePath);
             }
         }
@@ -37,7 +37,7 @@ namespace PasswordSafe
         }
         public static bool isOnline = false;
 
-        protected override void OnStartup(StartupEventArgs e)
+/*        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             try
@@ -62,12 +62,12 @@ namespace PasswordSafe
                 isOnline = false;
             }
         }
-
+*/
         protected override void OnExit(ExitEventArgs e)
         {
             BackUp.Dispose();
             UserDb.Dispose();
-            try
+/*            try
             {
                 using (new ConnectToSharedFolder(AppSettings.Default["DBLink"].ToString(), new NetworkCredential(AppSettings.Default["DbUsername"].ToString(), AppSettings.Default["DbPassword"].ToString())))
                 {
@@ -95,7 +95,7 @@ namespace PasswordSafe
             }
             catch
             {
-            }
+            }*/
         }
     }
 }
